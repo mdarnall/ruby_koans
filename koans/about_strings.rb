@@ -40,7 +40,8 @@ class AboutStrings < EdgeCase::Koan
 It was the best of times,
 It was the worst of times.
 }
-    assert_equal __, long_string.size
+    assert_equal __, long_string.length
+    assert_equal __, long_string.lines.count
   end
 
   def test_here_documents_can_also_handle_multiple_lines
@@ -48,7 +49,8 @@ It was the worst of times.
 It was the best of times,
 It was the worst of times.
 EOS
-    assert_equal __, long_string.size
+    assert_equal __, long_string.length
+    assert_equal __, long_string.lines.count
   end
 
   def test_plus_will_concatenate_two_strings
@@ -139,13 +141,6 @@ EOS
     assert_equal __, string[7..9]
   end
 
-  def test_you_can_get_a_single_character_from_a_string
-    string = "Bacon, lettuce and tomato"
-    assert_equal __, string[1]
-
-    # Surprised?
-  end
-
   in_ruby_version("1.8") do
     def test_in_ruby_1_8_single_characters_are_represented_by_integers
       assert_equal __, ?a
@@ -161,6 +156,26 @@ EOS
       assert_equal __, ?a == 97
     end
   end
+
+in_ruby_version("1.8") do
+    def test_in_ruby_1_8_you_can_get_a_single_character_from_a_string
+      string = "Bacon, lettuce and tomato"
+      assert_equal __, string[1]
+
+      # Surprised?
+    end
+  end
+  
+  in_ruby_version("1.9") do
+
+    def test_in_ruby_1_9_you_can_get_a_single_character_from_a_string
+      string = "Bacon, lettuce and tomato"
+      assert_equal "__", string[1]
+
+      # Surprised?
+    end
+  end
+
 
   def test_strings_can_be_split
     string = "Sausage Egg Cheese"
